@@ -1,0 +1,50 @@
+.form-control {
+display: inline-block;
+}
+.add_button {
+margin: 10px 0px 10px 0px;
+}
+.checkbox {
+margin-top: 20px;
+}
+.completed_item {
+text-decoration: line-through;
+}
+h1 {
+display: inline-block;
+color: #292b33;
+}
+body {
+background-color: #f6f6f6;
+}
+.text_holder {
+display: block;
+max-width: 100%;
+word-wrap: break-word;
+}
+#main{
+margin-top: 150px;
+background-color: #ffffff;
+border-radius: 5px;
+width: 50%;
+border: 1px solid #545454;
+}
+
+#main2{
+margin-top: 150px;
+background-color: #ffffff;
+border-radius: 5px;
+width: 50%;
+border: 1px solid #545454;
+}
+
+/*分页效果*/
+#pagination{ float:right; margin:10px 0; }
+#pagination-flickr li { border:0; margin:0; padding:0; font-size:11px; list-style:none; /* savers */ float:left; }
+#pagination-flickr a { border:solid 1px #DDDDDD; margin-right:2px; }
+#pagination-flickr .previous-off,#pagination-flickr .next-off { color:#666666; display:block; float:left; font-weight:bold; padding:3px 4px; }
+#pagination-flickr .next a,#pagination-flickr .previous a { font-weight:bold; border:solid 1px #FFFFFF; }
+#pagination-flickr .active { color:#ff0084; font-weight:bold; display:block; float:left; padding:4px 6px; }
+#pagination-flickr a:link,
+#pagination-flickr a:visited { color:#0063e3; display:block; float:left; padding:3px 6px; text-decoration:none; }
+#pagination-flickr a:hover { border:solid 1px #000; background:#0063DC; color:#FFF; }

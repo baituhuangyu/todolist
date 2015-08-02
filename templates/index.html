@@ -1,0 +1,134 @@
+{% load staticfiles %}
+{% load myfilter %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src={% static 'js/jquery.min.js' %}></script>
+<link type="text/css" rel="stylesheet" href={% static 'css/styles.css' %}>
+<title>ToDoList</title>
+<link rel="stylesheet" href={% static 'css/bootstrap.min.css' %}>
+<script src={% static 'js/bootstrap.min.js' %}></script>
+<script src={% static 'js/script.js' %}></script>
+<!-- Custom CSS -->
+<link rel="stylesheet" href={% static 'css/styles.css' %}>
+<link type="text/css" rel="stylesheet" href={% static 'css/jquerysctipttop.css' %} >
+    <link rel="stylesheet" href=""/>
+</head>
+
+<body>
+{% if IEBelow9 %}
+
+<div>
+<p><img src={% static 'images/IE.png' %} ></p>
+</div>
+
+
+{% else %}
+<div class="container" id="main">
+<h1>ToDoList 待办事项</h1>
+
+{% block add %}
+<form role="form" id="main_input_box" action="/addtodo/" method="get">
+{#<label>#}
+<input type="text" class="form-control" id="custom_textbox" name="Item" placeholder="还有什么事情需要做?">
+<input type="submit" value="Add" class="btn btn-primary add_button">
+{#</label>#}
+</form>
+
+{% endblock %}
+<ol class="list-group list_of_items">
+{% if nottodo %}
+{#待办事项#}
+
+{% block nottodo %}
+{% for anottodo in nottodo %}
+<li class="list-group-item">
+	<div class="text_holder">
+		{{ anottodo.id }} 、{{ anottodo.name }} —— {{ anottodo.pubtime | pubdatefilfer }}
+		<div class="btn-group pull-right">
+			<a href={% comment %}"http://www.baidu.com"{% endcomment %}"{% url 'delete' anottodo.id %}" title="delete"><button class="delete btn btn-warning">Delete</button></a>
+            <a href="{% url 'edit' anottodo.id %}" title="edit"><button class="edit btn btn-success">Edit</button></a>
+{#			{% comment %}<a href="{% url 'edit' nottodo.id %}" title="edit">{% endcomment %}<button class="edit btn btn-success">Edit</button>{% comment %}</a>{% endcomment %}#}
+		</div>
+	</div>
+	<div class="checkbox">
+		<label><a href="{% url 'finish' anottodo.id %}"><input type="checkbox" class="pull-right"></a></label>
+	</div>
+</li>
+{% endfor %}
+{#    分页pagination#}
+    <div id="pagination">
+    <ul id="pagination-flickr">
+    {% if nottodo.has_previous %}
+    <li class="previous"><a href="?notpage={{ nottodo.previous_page_number }}">&laquo;上一页</a></li>
+    {% else %}
+    <li class="previous-off">&laquo;上一页</li>
+    {% endif %}
+     <li class="active">{{ nottodo.number }}/{{ nottodo.paginator.num_pages }}</li>
+    {% if nottodo.has_next %}
+      <li class="next"><a href="?notpage={{ nottodo.next_page_number }}">下一页 &raquo;</a></li>
+    {% else %}
+      <li class="next-off">下一页 &raquo;</li>
+    {% endif %}
+   </ul>
+</div>
+
+{% endblock %}
+
+</ol>
+</div>
+{% endif %}
+
+{#已完成#}
+{% if finish %}
+<div class="container" id="main2">
+<h1>ToDoList  已完成事项</h1>
+{#<form role="form" id="main_input_box" action="/addtodo/" method="get">#}
+{#<label>#}
+{#<input type="text" class="form-control" id="custom_textbox" name="Item" placeholder="还有什么事情需要做?">#}
+{#<input type="submit" value="Add" class="btn btn-primary add_button">#}
+{#</label>#}
+{#</form>#}
+
+<ol class="list-group list_of_items">
+{% for finishtodo in finish %}
+<li class="list-group-item completed_item">
+	<div class="text_holder">
+		{{ finishtodo.id }}  、{{ finishtodo.name }} —— {{ finishtodo.pubtime | pubdatefilfer }}
+		<div class="btn-group pull-right">
+			<a href="{% url 'delete' finishtodo.id %}" title="delete"><button class="delete btn btn-warning">Delete</button></a>
+			<a href="{% url 'edit' finishtodo.id %}" title="edit"><button class="edit btn btn-success">Edit</button></a>
+		</div>
+	</div>
+	<div class="checkbox">
+		<label><a href="{% url 'nofinish' finishtodo.id %}"><input type="checkbox" class="pull-right"></a></label>
+	</div>
+</li>
+{% endfor %}
+    <div id="pagination">
+        <ul id="pagination-flickr">
+            {% if finish.has_previous %}
+                <li class="previous"><a href="?finishpage={{ finish.previous_page_number }}">&laquo;上一页</a></li>
+            {% else %}
+                <li class="previous-off">&laquo;上一页</li>
+            {% endif %}
+            <li class="active">{{ finish.number }}/{{ finish.paginator.num_pages }}</li>
+            {% if finish.has_next %}
+                <li class="next"><a href="?finishpage={{ finish.next_page_number }}">下一页 &raquo;</a></li>
+            {% else %}
+                <li class="next-off">下一页 &raquo;</li>
+            {% endif %}
+        </ul>
+    </div>
+
+{% endif %}
+</ol>
+</div>
+<div class="container" id="main"></div>
+
+{% endif %}
+</body>
+
+</html>

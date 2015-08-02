@@ -1,0 +1,46 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src={% static 'js/jquery.min.js' %}></script>
+<link type="text/css" rel="stylesheet" href={% static 'css/styles.css' %}>
+<title>ToDoList Edit</title>
+<link rel="stylesheet" href={% static 'css/bootstrap.min.css' %}>
+<script src={% static 'js/bootstrap.min.js' %}></script>
+<script src={% static 'js/script.js' %}></script>
+<!-- Custom CSS -->
+<link rel="stylesheet" href={% static 'css/styles.css' %}>
+<link type="text/css" rel="stylesheet" href={% static 'css/jquerysctipttop.css' %} >
+
+
+</head>
+
+<body>
+<div class="container" id="main">
+<h1>您正在编辑 id={{ todo.id  }} </h1>
+<form role="form" id="main_input_box" action="" method="post">{% csrf_token %}
+{#<label>#}
+<input type="text" class="form-control" id="custom_textbox" name="Item" placeholder="还有什么事情需要做?">
+<a href="{% url 'edit' todo.id %}" title="edit"><input type="submit" value="Edit" class="btn btn-primary add_button"></a>
+{#</label>#}
+</form>
+{#<ol class="list-group list_of_items">#}
+{##}
+{#    <li class="list-group-item">#}
+{#	<div class="text_holder">#}
+{#		{{ todo.id }} {{ todo.name }}#}
+{#		<div class="btn-group pull-right">#}
+{#			<a href={% comment %}"http://www.baidu.com"{% endcomment %}"{% url 'delete' todo.id %}" title="delete"><button class="delete btn btn-warning">Delete</button></a>#}
+{#            <a href="{% url 'edit' todo.id %}" title="edit"><button class="edit btn btn-success">Edit</button></a>#}
+{#			{% comment %}<a href="{% url 'edit' nottodo.id %}" title="edit">{% endcomment %}<button class="edit btn btn-success">Edit</button>{% comment %}</a>{% endcomment %}#}
+{#		</div>#}
+{#	</div>#}
+{#	<div class="checkbox">#}
+{#		<label><a href="{% url 'finish' todo.id %}"><input type="checkbox" class="pull-right"></a></label>#}
+{#	</div>#}
+{#</li>#}
+{#</ol>#}
+</div>
+</body></html>
